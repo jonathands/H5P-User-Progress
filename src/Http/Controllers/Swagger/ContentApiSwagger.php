@@ -242,6 +242,57 @@ interface ContentApiSwagger
     */
     public function update(ContentUpdateRequest $request, int $id): JsonResponse;
 
+
+    /**
+    * @OA\Post(
+    *      path="/api/hh5p/clone/{id}",
+    *      summary="Clones h5p content in database",
+    *      tags={"H5P"},
+    *      description="Clones h5p content in database",
+    *      security={
+    *          {"passport": {}},
+    *      },
+    *      @OA\Parameter(
+    *          name="id",
+    *          description="Id of Content from DB",
+    *          in="path",
+    *          required=true,
+    *          @OA\Schema(
+    *             type="integer",
+    *         )
+    *      ),
+    *      @OA\RequestBody(
+    *          required=true,
+    *          @OA\MediaType(
+    *              mediaType="application/json",
+    *              @OA\Schema(ref="#/components/schemas/H5PContentStore")
+    *          )
+    *      ),
+    *      @OA\Response(
+    *          response=200,
+    *          description="successful operation",
+    *          @OA\MediaType(
+    *              mediaType="application/json"
+    *          )
+    *      ),
+    *      @OA\Response(
+    *          response=422,
+    *          description="validation error",
+    *          @OA\MediaType(
+    *              mediaType="application/json"
+    *          )
+    *      ),
+    *      @OA\Response(
+    *          response=401,
+    *          description="unauthorised",
+    *          @OA\MediaType(
+    *              mediaType="application/json"
+    *          )
+    *      )
+    * )
+    */
+    public function clone(ContentUpdateRequest $request, int $id): JsonResponse;
+
     /**
     * @OA\Get(
     *      path="/api/hh5p/content",

@@ -21,6 +21,7 @@ Route::group(['middleware' => ['api', H5PLangMiddleware::class], 'prefix' => 'ap
         Route::post('content/upload', [ContentApiController::class, 'upload'])->name('hh5p.content.upload');
         Route::post('content', [ContentApiController::class, 'store'])->name('hh5p.content.store');
         Route::post('content/{id}', [ContentApiController::class, 'update'])->name('hh5p.content.update');
+        Route::post('content/clone/{id}', [ContentApiController::class, 'clone'])->name('hh5p.content.clone');
         Route::delete('content/{id}', [ContentApiController::class, 'destroy'])->name('hh5p.content.destroy');
         Route::get('content', [ContentApiController::class, 'index'])->name('hh5p.content.index');
         Route::get('content/{id}/export', [ContentApiController::class, 'download'])->name('hh5p.content.export')->middleware([QueryToken::class]);

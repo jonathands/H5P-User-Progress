@@ -66,6 +66,21 @@ class ContentApiController extends EscolaLmsBaseController implements ContentApi
         return $this->sendResponse(['id' => $contentId]);
     }
 
+    public function clone(ContentUpdateRequest $request, int $id): JsonResponse
+    {
+        try {
+            $contentId = $this->contentRepository->clone(
+                $id,
+                $request->get('library'), $request->get('params'),
+                $request->get('nonce')
+            );
+        } catch (Exception $error) {
+            return $this->sendError($error->getMessage(), 422);
+        }
+
+        return $this->sendResponse(['id' => $contentId]);
+    }
+    
     public function store(ContentCreateRequest $request): JsonResponse
     {
         try {
@@ -113,7 +128,6 @@ class ContentApiController extends EscolaLmsBaseController implements ContentApi
 
         return $this->sendResponse($settings);
     }
-
     public function upload(LibraryStoreRequest $request): JsonResponse
     {
         try {
