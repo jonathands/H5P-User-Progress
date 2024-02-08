@@ -105,6 +105,48 @@ class H5PContentRepository implements H5PContentRepositoryContract
         return $id;
     }
 
+    public function clone(int $id, string $library, string $params, string $nonce): int
+    {
+        $user = auth()->user();
+        $libNames = $this->hh5pService->getCore()->libraryFromString($library);
+
+        $libDb = H5PLibrary::where([
+            ['name', $libNames['machineName']],
+            ['major_version', $libNames['majorVersion']],
+            ['minor_version', $libNames['minorVersion']],
+        ])->first();
+
+        if ($libDb === null) {
+            throw new H5PException(H5PException::LIBRARY_NOT_FOUND);
+        }
+
+        $json = json_decode($params);
+
+        if ($json === null) {
+            throw new H5PException(H5PException::INVALID_PARAMETERS_JSON);
+        }
+
+        $content = H5PContent::where('id', $id)->first();
+
+        if ($content === null) {
+            throw new H5PException(H5PException::CONTENT_NOT_FOUND);
+        }
+
+        $content = $this->hh5pService->getCore()->saveContent([
+            'library_id' => $libDb->id,
+            'library' => $library,
+            'parameters' => $params,
+            'nonce' => $nonce,
+            'user_id' => $user->getKey(),
+            'author' => $user->email,
+        ]);
+
+        $this->filterParameters(H5PContent::findOrFail($content), $libDb);
+        $this->moveTmpFilesToContentFolders($nonce, $content);
+
+        return $content;
+    }
+
     private function moveTmpFilesToContentFolders($nonce, $contentId): bool
     {
         $storage_path = storage_path(config('hh5p.h5p_storage_path'));
