@@ -341,77 +341,7 @@ interface ContentApiSwagger
     *      )
     * )
     */
-    public function clone(ContentUpdateRequest $request, int $id): JsonResponse;
-
-    /**
-    * @OA\Get(
-    *      path="/api/hh5p/content",
-    *      summary="list of h5ps content in database",
-    *      tags={"H5P"},
-    *      description="list of h5ps content in database",
-    *      security={
-    *          {"passport": {}},
-    *      },
-    *      @OA\Parameter(
-    *          name="page",
-    *          description="page of pagination",
-    *          in="query",
-    *          required=false,
-    *          @OA\Schema(
-    *             type="integer",
-    *         )
-    *      ),
-    *      @OA\Parameter(
-    *          name="per_page",
-    *          description="items per page. If set to 0, returns ALL contents ",
-    *          in="query",
-    *          required=false,
-    *          @OA\Schema(
-    *             type="integer",
-    *         )
-    *      ),
-    *     @OA\Parameter(
-    *          name="title",
-    *          description="search items by title",
-    *          in="query",
-    *          required=false,
-    *          @OA\Schema(
-    *             type="string",
-    *         )
-    *      ),
-    *     @OA\Parameter(
-    *          name="library_id",
-    *          description="search items by library_id",
-    *          in="query",
-    *          required=false,
-    *          @OA\Schema(
-    *             type="integer",
-    *         )
-    *      ),
-    *      @OA\Response(
-    *          response=200,
-    *          description="successful operation",
-    *          @OA\JsonContent(
-    *             type="object",
-    *             ref="#/components/schemas/H5PContentList"
-    *         )
-    *      ),
-    *      @OA\Response(
-    *          response=422,
-    *          description="validation error",
-    *          @OA\MediaType(
-    *              mediaType="application/json"
-    *          )
-    *      ),
-    *      @OA\Response(
-    *          response=401,
-    *          description="unauthorised",
-    *          @OA\MediaType(
-    *              mediaType="application/json"
-    *          )
-    *      )
-    * )
-    */
+    
     public function index(ContentListRequest $request): JsonResponse;
 
     /**
