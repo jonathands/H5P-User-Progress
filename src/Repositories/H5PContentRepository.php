@@ -115,7 +115,8 @@ class H5PContentRepository implements H5PContentRepositoryContract
 
         $content = new H5PContent;
         $content->fill($origContent->toArray());
-        
+        $content->nonce = bin2hex(random_bytes(4));
+
         $content->save();
         
         return $content->id;

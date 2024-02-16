@@ -69,7 +69,7 @@ class ContentApiController extends EscolaLmsBaseController implements ContentApi
     public function clone(AdminContentReadRequest $request, int $id): JsonResponse
     {
         try {
-            $contentId = $this->contentRepository->clone($id );
+            $contentId = $this->contentRepository->clone($id);
         } catch (Exception $error) {
             return $this->sendError($error->getMessage(), 422);
         }
