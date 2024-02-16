@@ -295,7 +295,7 @@ interface ContentApiSwagger
 
     /**
     * @OA\Post(
-    *      path="/api/hh5p/content/clone/{id}",
+    *      path="/api/admin/hh5p/content/clone/{id}",
     *      summary="Clones h5p content in database",
     *      tags={"H5P"},
     *      description="Clones h5p content in database",
