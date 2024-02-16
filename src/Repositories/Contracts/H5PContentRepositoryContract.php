@@ -34,7 +34,7 @@ interface H5PContentRepositoryContract
 
     public function show(int $id): H5PContent;
 
-    public function clone(int $id, string $library, string $params, string $nonce): int;
+    public function clone(int $id): int;
 
     public function upload($file, $content = null, $only_upgrade = null, $disable_h5p_security = false): H5PContent;
 
