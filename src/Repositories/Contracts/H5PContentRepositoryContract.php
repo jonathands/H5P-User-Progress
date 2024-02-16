@@ -8,6 +8,7 @@ use Illuminate\Support\Collection;
 
 use EscolaLms\HeadlessH5P\Models\H5PContent;
 use EscolaLms\HeadlessH5P\Models\H5PLibrary;
+use EscolaLms\HeadlessH5P\Http\Requests\ContentUpdateRequest;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 interface H5PContentRepositoryContract
@@ -32,6 +33,8 @@ interface H5PContentRepositoryContract
     public function delete(int $id): int;
 
     public function show(int $id): H5PContent;
+
+    public function clone(ContentUpdateRequest $request, int $id): H5PContent;
 
     public function upload($file, $content = null, $only_upgrade = null, $disable_h5p_security = false): H5PContent;
 
