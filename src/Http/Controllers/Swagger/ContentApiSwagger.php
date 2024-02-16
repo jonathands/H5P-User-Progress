@@ -245,10 +245,10 @@ interface ContentApiSwagger
 
     /**
     * @OA\Post(
-    *      path="/api/hh5p/clone/{id}",
-    *      summary="Clones h5p content in database",
+    *      path="/api/hh5p/update/{id}",
+    *      summary="Updates h5p content in database",
     *      tags={"H5P"},
-    *      description="Clones h5p content in database",
+    *      description="Updates h5p content in database",
     *      security={
     *          {"passport": {}},
     *      },
@@ -295,7 +295,7 @@ interface ContentApiSwagger
 
     /**
     * @OA\Post(
-    *      path="/api/hh5p/clone/{id}",
+    *      path="/api/hh5p/content/clone/{id}",
     *      summary="Clones h5p content in database",
     *      tags={"H5P"},
     *      description="Clones h5p content in database",
