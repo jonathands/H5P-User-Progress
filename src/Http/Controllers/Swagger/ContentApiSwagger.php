@@ -291,7 +291,7 @@ interface ContentApiSwagger
     *      )
     * )
     */
-    public function clone(ContentUpdateRequest $request, int $id): JsonResponse;
+    public function clone(ContentCreateRequest $request, int $id): JsonResponse;
 
     /**
     * @OA\Post(
