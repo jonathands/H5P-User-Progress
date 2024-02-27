@@ -8,6 +8,7 @@ use EscolaLms\HeadlessH5P\Dtos\ContentFilterCriteriaDto;
 use EscolaLms\HeadlessH5P\Exceptions\H5PException;
 use EscolaLms\HeadlessH5P\Helpers\Helpers;
 use EscolaLms\HeadlessH5P\Models\H5PContent;
+use EscolaLms\HeadlessH5P\Models\H5PContentLibrary;
 use EscolaLms\HeadlessH5P\Models\H5PLibrary;
 use EscolaLms\HeadlessH5P\Models\H5PTempFile;
 use EscolaLms\HeadlessH5P\Repositories\Contracts\H5PContentRepositoryContract;
@@ -116,9 +117,19 @@ class H5PContentRepository implements H5PContentRepositoryContract
         $content = new H5PContent;
         $content->fill($origContent->toArray());
         $content->nonce = bin2hex(random_bytes(4));
+        
 
         $content->save();
-        
+
+                
+        foreach( $origContent->libraries() as $library ) {
+            $newLibrary = new H5PContentLibrary();
+            $newLibrary->fill($library->toArray());
+            $newLibrary->content_id = $content->id;
+            $newLibrary->save();
+        }
+
+
         return $content->id;
     }
 
